@@ -80,7 +80,7 @@ router.post("/forget-password", async (req, res) => {
         const token = jwt.sign({email: oldUser.email, id: oldUser._id},secret, {
             expiresIn:"5m"
         });
-        const link = `http://localhost:4000/api/reset-password/${oldUser._id}/${token}`;
+        const link = `https://loginpage-reset.onrender.com/api/reset-password/${oldUser._id}/${token}`;
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
