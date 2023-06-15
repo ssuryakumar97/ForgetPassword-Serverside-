@@ -32,7 +32,7 @@ router.post("/login", async(req,res) => {
     
         const user =await User.findOne({email: req.body.email})
         if(!user){
-          return  res.send({message:"User not found"})
+          return  res.json({message:"User not found"})
         } 
         if(await bcrypt.compare(req.body.password, user.password)){
             const token = jwt.sign({email: user.email},process.env.JWT_SECRET, {expiresIn: 20})
@@ -42,7 +42,7 @@ router.post("/login", async(req,res) => {
                 return res.json({error: "error"})
             }
         }
-        res.json({status: "error", error: "Invalid password"})
+        res.json({status: "error", message: "Invalid password"})
 })
 
 //USER DATA
